@@ -2,6 +2,9 @@
 // Wrapped in an IIFE for data encapsulation
 var budgetController = (function () {
 
+    // Variable for local storage
+    var localBudget;
+
     // Expense function constructor
     var Expense = function (id, description, value) {
         this.id = id;
@@ -53,6 +56,17 @@ var budgetController = (function () {
         budget: 0,
         percentage: -1
     };
+
+    // Local storage function
+    function checkForLocal() {
+        if (localStorage.getItem('localBudget') === null) {
+
+            // setup data object if no item named 'localBudget' exists
+            localBudget = data;
+        } else {
+            localBudget = JSON.parse(localStorage.getItem('localBudget'));
+        }
+    }
 
     return {
 
@@ -139,6 +153,20 @@ var budgetController = (function () {
                 totalExp: data.totals.exp,
                 percentage: data.percentage
             };
+        },
+
+        // Save to local storage
+        saveToLocal: function () {
+
+            // Save current data object
+            localBudget = data;
+            localStorage.setItem('localBudget', JSON.stringify(localBudget));
+        },
+
+        // Retrieve from local storage
+        getFromLocal: function () {
+            checkForLocal();
+            return localBudget.allItems;
         },
 
         testing: function () {
@@ -360,6 +388,9 @@ var controller = (function (budgetCtrl, UICtrl) {
 
         // Display budget and update UI
         UICtrl.displayBudget(budget);
+
+        // Save to local storage
+        budgetCtrl.saveToLocal();
     };
 
     var updatePercentages = function () {
@@ -426,20 +457,46 @@ var controller = (function (budgetCtrl, UICtrl) {
         }
     };
 
+    // Retrieve data from local storage
+    var ctrlRetrieveItem = function () {
+        var allItems, incItems, expItems, newItem;
+        allItems = budgetCtrl.getFromLocal();
+        incItems = allItems.inc;
+        expItems = allItems.exp;
+
+        // Retrieve income items and add to UI by calling addListItem
+        incItems.forEach(function (item) {
+            newItem = budgetCtrl.addItem('inc', item.description, item.value);
+            UICtrl.addListItem(newItem, 'inc');
+        });
+
+        // Retrieve expense items and add to UI
+        expItems.forEach(function (item) {
+            newItem = budgetCtrl.addItem('exp', item.description, item.value);
+            UICtrl.addListItem(item, 'exp');
+        });
+    }
+
     return {
         init: function () {
             console.log('The application has started successfully.')
+
+            // Retrieve locally stored items
+            ctrlRetrieveItem();
 
             // Display date
             UICtrl.displayDate();
 
             // Clear out fields on application start
-            UICtrl.displayBudget({
-                budget: 0,
-                totalInc: 0,
-                totalExp: 0,
-                percentage: -1
-            });
+            // UICtrl.displayBudget({
+            //     budget: 0,
+            //     totalInc: 0,
+            //     totalExp: 0,
+            //     percentage: -1
+            // });
+
+            // Update the budget
+            updateBudget();
 
             // Setup event listeners
             setupEventListeners();
