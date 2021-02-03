@@ -2,20 +2,105 @@
 <html lang="en">
 
 <head>
+    <!-- Import fonts and ionic framework  -->
     <meta charset="UTF-8">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:100,300,400,600" rel="stylesheet" type="text/css">
     <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css">
     <link type="text/css" rel="stylesheet" href="budgeter.css">
+    <script>
+        // Log-in and Registration Modal Functions
+        function openLoginForm() {
+            document.body.classList.add("showLoginForm");
+            document.body.classList.add("hideReg");
+        };
+
+        function openRegistrationForm() {
+            document.body.classList.add("showRegistrationForm");
+            document.body.classList.add("hideLogin");
+        };
+
+        function closeLoginForm() {
+            document.body.classList.remove("showLoginForm");
+            document.body.classList.remove("hideReg");
+        };
+
+        function closeRegistrationForm() {
+            document.body.classList.remove("showRegistrationForm");
+            document.body.classList.remove("hideLogin");
+        };
+    </script>
     <title>Budgeter</title>
 </head>
 
 <body>
     <div class="top">
+
+        <!-- Login and Register Buttons -->
+        <div class="login__buttons">
+            <li><button class="button hvr-grow" onclick="openLoginForm()">Login</button></li>
+            <li><button class="button hvr-grow" onclick="openRegistrationForm()">Register</button></li>
+        </div>
+
+        <!-- Login modal -->
+        <div class="popup__overlay"></div>
+        <div class="popup" id="login__popup">
+            <div class="popup__close" onclick="closeLoginForm()">&times;</div>
+            <div class="form">
+                <div class="avatar">
+                    <img src="/budget_imgs/budgeter_logo_v2.png" alt="budgeter logo">
+                </div>
+                <div class="popup__header">
+                    💸 Welcome back! 💸
+                </div>
+                <div class="popup__element">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username">
+                </div>
+                <div class="popup__element">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password">
+                    <p>Forgot your password?</p>
+                </div>
+                <div class="popup__element">
+                    <button>Login</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Registration Modal -->
+        <div class="popup__overlay"></div>
+        <div class="popup" id="reg__popup">
+            <div class="popup__close" onclick="closeRegistrationForm()">&times;</div>
+            <div class="form">
+                <div class="avatar">
+                    <img src="/budget_imgs/budgeter_logo_v2.png" alt="budgeter logo">
+                </div>
+                <div class="popup__header">
+                    Create an account and use Budgeter anywhere! 🤑
+                </div>
+                <div class="popup__element">
+                    <label for="regUsername">Username:</label>
+                    <input type="text" id="regUsername">
+                </div>
+                <div class="popup__element">
+                    <label for="regPassword">Password:</label>
+                    <input type="password" id="regPassword">
+                    <ion-icon name="eye"></ion-icon>
+                </div>
+                <div class="popup__element">
+                    <button>Create Account</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Plus and Minus Budget/Month Display (top part) -->
         <div class="budget">
             <div class="budget__title">
                 Available Budget in <span class="budget__title--month">%Month%</span>:
             </div>
             <div class="budget__value">+ 2,345.64</div>
+
+            <!-- Income section -->
             <div class="budget__income clearfix">
                 <div class="budget__income--text">Income</div>
                 <div class="right">
@@ -23,6 +108,8 @@
                     <div class="budget__income--percentage">&nbsp;</div>
                 </div>
             </div>
+
+            <!-- Expense section -->
             <div class="budget__expenses clearfix">
                 <div class="budget__expenses--text">Expenses</div>
                 <div class="right clearfix">
@@ -32,6 +119,8 @@
             </div>
         </div>
     </div>
+
+    <!-- Budget Item Adder/Display (bottom part) -->
     <div class="bottom">
         <div class="add">
             <div class="add__container">
@@ -45,6 +134,8 @@
             </div>
         </div>
         <div class="container clearfix">
+
+            <!-- Income item -->
             <div class="income">
                 <h2 class="icome__title">Income</h2>
                 <div class="income__list">
@@ -62,6 +153,8 @@
 
                 </div>
             </div>
+
+            <!-- Expense item -->
             <div class="expenses">
                 <h2 class="expenses__title">Expenses</h2>
                 <div class="expenses__list">
@@ -82,6 +175,7 @@
         </div>
     </div>
     <script src="budgeter.js"></script>
+    <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
 </body>
 
 </html>

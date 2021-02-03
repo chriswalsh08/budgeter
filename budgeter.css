@@ -25,6 +25,34 @@ body {
 .red { color: #FF5049 !important; }
 .red-focus:focus { border: 1px solid #FF5049 !important; }
 
+.button {
+    display: inline-block;
+    padding: 0.8rem;
+    transition: all 0.5s;
+    border: none;
+    color: #f4f4f4;
+    background-color: #333;
+}
+
+/* Button animations */
+
+.hvr-grow {
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transform: perspective(1px) translateZ(0);
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 0 1px rgba(0,0,0,0);
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-property: transform;
+    transition-property: transform;
+}
+
+.hvr-grow:hover, .hvr-grow:focus, .hvr-grow:active {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+}
+
 /* Header Section */
 
 .top {
@@ -43,6 +71,147 @@ body {
     transform: translate(-50%, -50%);
     color: #fff;
 }
+
+/* Login and registration popup modals */
+
+.login__buttons {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 20px;
+}
+
+.login__buttons li {
+    list-style: none;
+    padding: 10px;
+}
+
+.popup__overlay {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100vh;
+    z-index: 1;
+    background: rgba(0,0,0,0.4);
+    display: none;
+}
+
+.popup {
+    position: absolute;
+    top: -150%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1.15);
+    width: 300px;
+    height: 550px;
+    background: #f5f5f5;
+    z-index: 2;
+    opacity: 0;
+    box-shadow: 5px 5px 3px rgba(0,0,0,0.2);
+    transition: transform 300ms ease-in-out, opacity 300ms ease-in-out;
+}
+
+body.hideReg #reg__popup, body.hideLogin #login__popup {
+    z-index: 0;
+}
+
+body.showLoginForm .popup__overlay, body.showRegistrationForm .popup__overlay {
+    display: block;
+}
+
+body.showLoginForm .popup {
+    top: 125%;
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.25);
+}
+
+body.showRegistrationForm .popup {
+    top: 125%;
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.25);
+}
+
+.popup .popup__close {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    width: 40px;
+    height: 40px;
+    background: #555;
+    color: #f5f5f5;
+    font-size: 25px;
+    font-weight: 600;
+    text-align: center;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.popup .form .avatar {
+    margin: 0;
+    text-align: center;
+}
+
+.popup .form .avatar img {
+    width: 250px;
+}
+
+.popup .form .popup__header {
+    text-align: center;
+    font-size: 20px;
+    font-weight: 600;
+    color: #222;
+    margin: 0px 0px 10px 0px;
+}
+
+.popup .form .popup__element {
+    padding: 8px 20px;
+}
+
+.popup .form .popup__element p {
+    font-size: 14px;
+}
+
+.popup .form .popup__element label {
+    display: block;
+    font-size: 14px;
+    color: #222;
+    margin-bottom: 5px;
+}
+
+.popup .form .popup__element input {
+    width: 100%;
+    padding: 8px 10px;
+    box-sizing: border-box;
+    outline: none;
+    border: 1px solid #aaa;
+    background: #eee;
+    border-radius: 5px;
+}
+
+.popup .form .popup__element button {
+    margin-top: 5px;
+    width: 100%;
+    padding: 10px 0px;
+    text-transform: uppercase;
+    outline: none;
+    border: none;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    background: #00a85d;
+    color: #fff;
+}
+
+#regPassword {
+    width: 80%;
+}
+
+ion-icon {
+    font-size: 36px;
+    color: #6d6d6d;
+    float: right;
+}
+
+/* Top part */
 
 .budget__title {
     font-size: 18px;
@@ -104,11 +273,9 @@ body {
 }
 
 
-/**********************************************
-*** BOTTOM PART
-**********************************************/
+/* Bottom part */
 
-/***** FORM *****/
+/* Form */
 .add {
     padding: 14px;
     border-bottom: 1px solid #e7e7e7;
@@ -171,7 +338,7 @@ body {
 
 .add__btn:focus { outline: none; }
 
-/***** LISTS *****/
+/* Lists */
 .container {
     width: 1000px;
     margin: 60px auto;
