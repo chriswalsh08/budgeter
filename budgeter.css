@@ -209,6 +209,7 @@ ion-icon {
     font-size: 36px;
     color: #6d6d6d;
     float: right;
+    cursor: pointer;
 }
 
 /* Top part */

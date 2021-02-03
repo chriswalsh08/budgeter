@@ -7,6 +7,8 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:100,300,400,600" rel="stylesheet" type="text/css">
     <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css">
     <link type="text/css" rel="stylesheet" href="budgeter.css">
+    <script type="module" src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule="" src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.js"></script>
     <script>
         // Log-in and Registration Modal Functions
         function openLoginForm() {
@@ -28,6 +30,17 @@
             document.body.classList.remove("showRegistrationForm");
             document.body.classList.remove("hideLogin");
         };
+
+        // Password toggle
+        function togglePassword() {
+            const password = document.getElementById("regPassword");
+            if (password.type === "password") {
+                password.type = "text";
+            } else {
+                password.type = "password";
+            }
+        }
+
     </script>
     <title>Budgeter</title>
 </head>
@@ -85,7 +98,7 @@
                 <div class="popup__element">
                     <label for="regPassword">Password:</label>
                     <input type="password" id="regPassword">
-                    <ion-icon name="eye"></ion-icon>
+                    <ion-icon name="eye" onclick="togglePassword()"></ion-icon>
                 </div>
                 <div class="popup__element">
                     <button>Create Account</button>
@@ -175,7 +188,6 @@
         </div>
     </div>
     <script src="budgeter.js"></script>
-    <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
 </body>
 
 </html>
