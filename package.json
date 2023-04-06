@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/chriswalsh08/budgeter/issues"
   },
-  "homepage": "https://github.com/chriswalsh08/budgeter#readme"
+  "homepage": "https://github.com/chriswalsh08/budgeter#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
 }
